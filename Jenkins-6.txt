@@ -1,0 +1,87 @@
+Build Pipeline Plugin
+==========================
+This plugin is used to see the list of upstream and downstream
+jobs in a different GUI where we can configure and run the jobs
+
+1 Open the dashboard of Jenkins
+2 Click on Manage Jenkins--->Click on Manage Plugin'
+3 Go to Available Section--->Search for Build Pipeline plugin
+4 Install it
+5 Go to the dashboard of Jenkins--->Go to the location where
+  all jobs are listed--->Click on New view icon(+)
+6 Give some name for the view--->Select Pipeline view-->OK
+7 Go to upstream/downstream config
+8 Select the intial job--->OK
+
+Pipeline as Code
+=======================
+
+Scrupted Pipeline Syntax
+===============================
+node('master/slave)
+{
+   stages('Stage name in CI-CD')
+   {
+      Groovy script for implementing this stage
+   }
+}
+
+Declarative Pipeline Syntax
+==================================
+pipeline
+{
+   agent any
+   stages
+   {
+       stage('Stage name in CI-CD')
+       {
+          steps
+          {
+              Groovy script for implementing this stage
+          }
+
+   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

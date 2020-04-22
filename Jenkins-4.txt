@@ -1,0 +1,145 @@
+Stage 3 (Continuous Deployment)
+===================================
+1 Open the dashboard of Jenkins
+2 Click on Manage Jenkins
+3 Click on Manage Plugins
+4 Go to Available section--->Search for "Deploy to container" plugin
+5 Click on Install without restart
+6 Open the dash board of Jenkins
+7 Go to the Development job--->Click on Configure
+8 Go to Post Build actions
+9 Click on Add Post Build action
+10 Select Deploy war/ear to container
+11 war/ear files:  **\*.war
+   Context Path: testapp
+   Click on Add Container
+   Select tomcat8
+   Enter username and password of tomcat
+12 Click on Apply--->save
+13 Go to the dashboard of Jenkins--->Go to the development job
+   Click on Build icon
+   This job will deploy the artifact into the tomcat on the QAServer
+   The testers can access this application using a browser
+   a)LAunch any browser
+   b) public_ip_of_qaserver:8080/testapp
+==============================================
+
+Stage 4 (Continuous Testing)
+--------------------------------
+1 Open the dashboard of Jenkins
+2 Click on New item---->Enter the name of the job of Testing
+3 Select Free Style Project--->OK
+4 Go to Source Code Management---->Click on Git
+5 Enter the github url where the testers have uploaded the selenium scripts
+  https://github.com/intelliqittrainings/FunctionalTesting.git
+6 Go to Build section
+7 Click on Execute shell command
+8 java -jar testing.jar
+9 Click on Apply--->Save
+10 Go to the dashboard of Jenkins
+11 Go to Testing job and click on Build icon
+   This job will download all the selenium test scripts and it will run those
+   scripts
+
+Linking Development and Testing jobs
+==========================================
+1 Go to the dashboad of Jenkins
+2 Go to Development job--->Click on Configure
+3 Go to Post Build section--->Click on Add Post Build action
+4 Click on Build other Projects
+5 Enter project name as Testing
+6 Click on Save
+  This will create a link between the Development and Testing job in such a way   that once all the stages in the Development job are done it will automaticlly
+  trigger the Testing job
+
+
+Copying Artifacts from Development job to Testing job
+======================================================
+1 Open the dashboard of Jenkins
+2 Click on Manage Jenkins--->Click on Manage Plugins
+3 Go to Available section--->Search for "Copy Artifact" plugin
+4 Click on Instal without restart
+5 Go to the dashboard of Jenkins
+6 Go to the Development job--->Click on Configure
+7 Go to Post build actions--->Click on Add Post Build action
+8 Click on Archive the artifacts
+9 Enter the files to be archived as **\*.war
+10 Apply--->Save
+11 Go to the dashboard of Jenkins--->go to Testing job--->Click on configure
+12 Go to Build section--->Click on Add build step
+13 Click on Copy artifacts from another project--->Enter project name as    Development--->Click on Save
+   This will copy the artifacts(war file) from Development job and pass them
+   to the workspace of the Testing job
+
+
+Stage 5 (Continuous dElivery)
+===================================
+1 Open the dashboard of Jenkins
+2 go to the Testing job---->Click on Configure
+3 Go to Post Build actions--->Click on Add Post build action
+4 Click on Deploy war/ear to container
+  war/ear file:  **/*.war
+  content path: prodapp
+  Click on Add container---->Select tomcat8
+  Enter username and password of tomcat8
+  Tomcat url: private_ip_of_prodserver:8080
+5 Click on Apply--->Save
+
+
+
+Scheduling the Jenkins job for a specific date and time
+=========================================================
+1 Open the dashboard of Jenkins
+2 Go to the job(Development) that we want to schedule
+3 Click on Configure
+4 Go to Build Triggers
+5 Click on Build Periodically
+6 Schedule the date and time
+7 Apply--->Save
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+   

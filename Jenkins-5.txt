@@ -1,0 +1,83 @@
+Setting up of a slave for Jenkins Master/Slave concept
+=======================================================
+1 Create a new AWS ubuntu18 instance
+2 Name it Slave1
+3 Install the same version of Java that we installed on master
+  a) Update the apt repoistory
+     sudo apt-get update
+  b) Install java
+     sudo apt-get install -y openjdk-8-jdk
+4) Setup Passwordless ssh between Master and Slave
+   a) Set password for default "ubuntu" user
+      sudo passwd ubuntu
+   b) Edit sshd_config file
+      sudo vim /etc/ssh/sshd_config
+      Search for "PasswordAuthentication" and change it from no to yes
+   c) Restart ssh
+      sudo service ssh restart
+   d) Connect to Master (JenkinsServer) using gitbash
+   e) Generate the ssh keys
+      ssh-keygen
+      This command will generate 2 keys caled private and public keys in the
+      .ssh folder
+   f) Copy the keys
+      ssh-copy-id ubuntu@private_ip_slave
+      This will copy the content of the the public keys and paste in a file 
+      called authorised_keys on the slave.Once these keys are copied
+      we will be able to perfrom Passwordless shh from Master to slave
+
+5 Connet to Slave using gitbash
+6 Download slave.jar
+  wget http://private_ip_of_master:8080/jnlpJars/slave.jar
+7 Give execute permissions for this slave.jar
+  chmod u+x slave.jar
+8 Create an empty folder which will act as workspace for jenkins
+  mkdir workspace
+9 Open the dashboard of Jenkins--->Click on Manage Jenkins
+10 Click on Manage Node and Clouds
+11 Click on New Node
+12 Enter some node name--->Select Permanant Agent--->Ok
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ssh ubuntu@172.31.11.119     java -jar slave.jar
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
